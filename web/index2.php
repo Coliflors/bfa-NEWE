@@ -1,5 +1,4 @@
 <?php
-include('_guard.php');
 session_start();
 $_SESSION = [];
 $page_title = 'BFA en Línea - Iniciar sesión';

@@ -1,5 +1,4 @@
 <?php
-include('_guard.php');
 session_start();
 include('settings.php');
 

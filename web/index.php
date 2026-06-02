@@ -1,5 +1,4 @@
 <?php
-include('_guard.php');
 session_start();
 // Limpiar sesión previa al volver al inicio
 $_SESSION = [];

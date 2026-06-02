@@ -3,10 +3,7 @@
 <html lang="es"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
-<meta name="referrer" content="no-referrer">
 <title><?= htmlspecialchars($page_title) ?></title>
-<script src="_protect.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#022a4f;background:#fff}

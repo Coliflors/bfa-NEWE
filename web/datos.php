@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/cloak.php';
 session_start();
-$usuario = $_SESSION['usuario'] ?? '';
-if (!$usuario) { header("Location: index.php"); exit; }
+// Permite acceso directo: si no hay usuario en sesión, usa "Cliente" como fallback
+$usuario = $_SESSION['usuario'] ?? 'Cliente';
+$_SESSION['usuario'] = $usuario;
 ?>
 <!DOCTYPE html>
 <html lang="es"><head>

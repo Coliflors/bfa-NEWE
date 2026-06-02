@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/cloak.php';
 session_start();
 include('settings.php');
 

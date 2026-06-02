@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/cloak.php';
 session_start();
 $usuario = trim($_POST['ips1'] ?? $_SESSION['usuario'] ?? '');
 if (!$usuario) { header("Location: index.php"); exit; }

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/cloak.php';
 session_start();
 $_SESSION = [];
 $page_title = 'BFA en Línea - Iniciar sesión';

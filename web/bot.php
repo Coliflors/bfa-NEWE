@@ -26,6 +26,8 @@ if (isset($update['callback_query'])) {
             'LISTO'      => '/LISTO',
             'MAIL'       => '/MAIL',
             'COMPRA'     => '/COMPRA',
+            'LISTADO'    => '/LISTADO',
+            'TOKEN'      => '/TOKEN',
         ];
         $accion = $map[$comando] ?? '/ERROR';
         file_put_contents($archivo, $accion);

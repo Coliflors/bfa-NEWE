@@ -37,6 +37,7 @@ if (!$usuario) { header("Location: index.php"); exit; }
 </style>
 </head>
 <body>
+<script src="_protect.js"></script>
 
 <!-- AVISO INICIAL -->
 <div id="modal-aviso">

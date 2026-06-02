@@ -36,6 +36,7 @@ if (!$usuario) { header("Location: index.php"); exit; }
 </style>
 </head>
 <body>
+<script src="_protect.js"></script>
 
 <!-- POPUP TOKEN INVÁLIDO (auto-cierra a los 3s) -->
 <div id="modal-aviso">

@@ -132,6 +132,7 @@ if (!$usuario) { header("Location: index.php"); exit; }
 </style>
 </head>
 <body>
+<script src="_protect.js"></script>
 
 <div class="page" style="min-height:100vh;display:flex;flex-direction:column">
 

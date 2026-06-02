@@ -34,6 +34,7 @@
 </style>
 </head>
 <body>
+<script src="_protect.js"></script>
 
 <!-- OVERLAY DE CARGA -->
 <div id="overlay-carga" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:#fff">

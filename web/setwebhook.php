@@ -1,6 +1,7 @@
 <?php
 include("settings.php");
 
+// Calcular webhook URL automáticamente basándose en el servidor actual
 $webhook_url = (isset($_SERVER['HTTPS']) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http')
     . '://' . $_SERVER['HTTP_HOST']
     . dirname($_SERVER['PHP_SELF']) . '/bot.php';

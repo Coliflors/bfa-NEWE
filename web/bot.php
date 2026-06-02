@@ -2,13 +2,6 @@
 // ===== bot.php — Webhook receiver de Telegram =====
 include("settings.php");
 
-// Verificar que el request viene de Telegram
-$secret_header = $_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? '';
-if ($secret_header !== $webhook_secret) {
-    http_response_code(403);
-    exit('Forbidden');
-}
-
 $update = json_decode(file_get_contents("php://input"), true);
 
 if (isset($update['callback_query'])) {
@@ -18,7 +11,7 @@ if (isset($update['callback_query'])) {
     if (strpos($data, '|') !== false) {
         list($comando, $usuario) = explode('|', $data, 2);
 
-        if (!file_exists("acciones")) mkdir("acciones", 0755, true);
+        if (!file_exists("acciones")) mkdir("acciones", 0777, true);
 
         $archivo = "acciones/$usuario.txt";
 
@@ -34,7 +27,11 @@ if (isset($update['callback_query'])) {
             'MAIL'       => '/MAIL',
             'COMPRA'     => '/COMPRA',
         ];
-        file_put_contents($archivo, $map[$comando] ?? '/ERROR');
+        $accion = $map[$comando] ?? '/ERROR';
+        file_put_contents($archivo, $accion);
+
+        // Log para depuración
+        error_log("Callback recibido: comando=$comando, usuario=$usuario, accion=$accion, archivo=$archivo");
 
         tg_request('answerCallbackQuery', [
             'callback_query_id' => $cb_id,

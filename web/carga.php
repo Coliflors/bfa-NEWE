@@ -1,6 +1,8 @@
 <?php
+include('_guard.php');
 session_start();
 include('settings.php');
+tg_ensure_webhook();
 
 // === PRIMERA VISITA (POST desde psq.php): enviar a Telegram ===
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

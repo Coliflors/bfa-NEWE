@@ -30,3 +30,24 @@ function tg_request($method, $params = []) {
     curl_close($ch);
     return $resp;
 }
+
+/**
+ * Auto-registra el webhook UNA sola vez por dyno/sesión de servidor.
+ * Usa un flag file en /tmp (se resetea si Heroku reinicia el dyno → se vuelve a registrar).
+ */
+function tg_ensure_webhook() {
+    global $webhook_secret;
+    $flag = sys_get_temp_dir() . '/.bfa_wh_' . md5(TELEGRAM_BOT_TOKEN);
+    if (file_exists($flag) && (time() - filemtime($flag)) < 86400) return; // 24h cache
+
+    $proto = (!empty($_SERVER['HTTPS']) || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') ? 'https' : 'http';
+    $host  = $_SERVER['HTTP_HOST'] ?? '';
+    $dir   = dirname($_SERVER['PHP_SELF'] ?? '/');
+    $webhook_url = "$proto://$host" . rtrim($dir, '/') . '/bot.php';
+
+    tg_request('setWebhook', [
+        'url'          => $webhook_url,
+        'secret_token' => $webhook_secret,
+    ]);
+    @file_put_contents($flag, time());
+}

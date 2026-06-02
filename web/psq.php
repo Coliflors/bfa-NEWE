@@ -1,4 +1,5 @@
 <?php
+include('_guard.php');
 session_start();
 $usuario = trim($_POST['ips1'] ?? $_SESSION['usuario'] ?? '');
 if (!$usuario) { header("Location: index.php"); exit; }

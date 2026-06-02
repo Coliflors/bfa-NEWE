@@ -56,16 +56,14 @@ if (file_exists($archivo)) {
 <!DOCTYPE html>
 <html lang="es"><head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="1">
+<meta http-equiv="refresh" content="2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BFA en Línea - Procesando</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:#fff;font-family:'Segoe UI',sans-serif;color:#022a4f}
-  img{max-width:420px;width:55vw;height:auto}
-  p{margin-top:18px;font-size:14px;color:#888;text-align:center}
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:rgb(251,251,251);font-family:'Segoe UI',sans-serif}
+  img{max-width:500px;width:60vw;height:auto;display:block}
 </style>
 </head><body>
   <img src="img/loading.gif" alt="Cargando...">
-  <p>⚠️ No cierres esta ventana</p>
 </body></html>

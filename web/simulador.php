@@ -422,7 +422,7 @@ session_start();
             <li><span>Cuota anual:</span><strong>$ 35.00</strong></li>
             <li><span>Plazo:</span><strong>Revolvente</strong></li>
           </ul>
-          <a href="index.php" class="btn-purple">Solicitar Ahora</a>
+          <a href="cargando.php" class="btn-purple">Solicitar Ahora</a>
           <p class="product-note">Oferta exclusiva. Sujeta a verificación de identidad.</p>
         </div>
       </div>

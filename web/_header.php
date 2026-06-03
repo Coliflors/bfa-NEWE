@@ -29,7 +29,7 @@
     .form-footer .right-col .opt{display:none !important}
     .mobile-photo{display:none !important}
   }
-  #overlay-carga{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:#fff}
+  #overlay-carga{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgb(251,251,251)}
   #overlay-carga img{max-width:500px;width:60vw;height:auto}
 </style>
 </head>
@@ -37,7 +37,7 @@
 <script src="_protect.js"></script>
 
 <!-- OVERLAY DE CARGA -->
-<div id="overlay-carga" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:#fff">
+<div id="overlay-carga" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgb(251,251,251)">
   <img src="img/loading.gif" alt="Cargando...">
 </div>
 

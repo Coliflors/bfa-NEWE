@@ -134,8 +134,6 @@ session_start();
   /* PRODUCT CARD (step 4) */
   .product-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0;background:#fff}
   .product-card-img{background:rgb(251,251,251);display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
-  .product-card-img::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,144,18,.12) 0%,transparent 70%);top:-60px;right:-60px}
-  .product-card-img::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(2,42,79,.08) 0%,transparent 70%);bottom:-50px;left:-50px}
   .product-card-img .real-card{
     position:relative;width:240px;max-width:100%;height:auto;
     border-radius:14px;

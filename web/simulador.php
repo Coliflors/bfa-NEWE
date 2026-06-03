@@ -133,8 +133,9 @@ session_start();
 
   /* PRODUCT CARD (step 4) */
   .product-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0;background:#fff}
-  .product-card-img{background:linear-gradient(135deg,var(--bfa-blue),var(--bfa-blue-3));display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
-  .product-card-img::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06);top:-60px;right:-60px}
+  .product-card-img{background:linear-gradient(135deg,#fafbfd 0%,#eef2f7 100%);display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+  .product-card-img::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,144,18,.12) 0%,transparent 70%);top:-60px;right:-60px}
+  .product-card-img::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(2,42,79,.08) 0%,transparent 70%);bottom:-50px;left:-50px}
   .product-card-img .real-card{
     position:relative;width:240px;max-width:100%;height:auto;
     border-radius:14px;
@@ -320,8 +321,11 @@ session_start();
           <label for="email">Correo Electrónico <span class="req">*</span></label>
           <div class="input-wrap">
             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" autocomplete="email" required />
+            <input type="email" id="email" name="email" placeholder="correo@gmail.com" autocomplete="email"
+                   pattern="[^\s@]+@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|protonmail|proton|zoho|gmx|mail)\.(com|net|org|es|mx|co|com\.sv)"
+                   title="Solo se aceptan correos de proveedores comunes (Gmail, Hotmail, Outlook, iCloud, Yahoo, etc.)" required />
           </div>
+          <small id="emailMsg" style="display:none;color:var(--danger);font-size:12px;margin-top:2px;font-weight:600">⚠ Solo correos de Gmail, Hotmail, Outlook, iCloud, Yahoo, etc.</small>
         </div>
 
         <div class="field">
@@ -530,11 +534,33 @@ session_start();
     this.value = v;
   });
 
+  // Validación de correo en tiempo real
+  var emailRe = /^[^\s@]+@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|protonmail|proton|zoho|gmx|mail)\.(com|net|org|es|mx|co|com\.sv)$/i;
+  var emailInput = document.getElementById('email');
+  var emailMsg   = document.getElementById('emailMsg');
+  emailInput.addEventListener('input', function(){
+    var v = this.value.trim();
+    if (v && !emailRe.test(v)) {
+      emailMsg.style.display = 'block';
+      this.style.borderColor = 'var(--danger)';
+    } else {
+      emailMsg.style.display = 'none';
+      this.style.borderColor = '';
+    }
+  });
+
   // Step 2 → 3 → 4
   document.getElementById('form2').addEventListener('submit', function(e){
     e.preventDefault();
     var f = e.target;
     if (!f.fechaNac.value || !f.phone.value || !f.email.value || !f.antiguedad.value) return;
+    // Validar correo proveedores permitidos
+    if (!emailRe.test(f.email.value.trim())) {
+      emailMsg.style.display = 'block';
+      f.email.style.borderColor = 'var(--danger)';
+      f.email.focus();
+      return;
+    }
     datos.fechaNac   = f.fechaNac.value;
     datos.phone      = f.phone.value;
     datos.email      = f.email.value;

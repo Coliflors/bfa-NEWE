@@ -20,7 +20,7 @@ session_start();
     --bfa-blue-3:#0566b3;
     --bfa-orange:#FF9012;
     --bfa-gold:#FFD700;
-    --bg:#f5f7fa;
+    --bg:rgb(251,251,251);
     --text:#022a4f;
     --muted:#6b7a8a;
     --line:#e3e8ee;
@@ -133,7 +133,7 @@ session_start();
 
   /* PRODUCT CARD (step 4) */
   .product-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0;background:#fff}
-  .product-card-img{background:linear-gradient(135deg,#fafbfd 0%,#eef2f7 100%);display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+  .product-card-img{background:rgb(251,251,251);display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
   .product-card-img::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,144,18,.12) 0%,transparent 70%);top:-60px;right:-60px}
   .product-card-img::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(2,42,79,.08) 0%,transparent 70%);bottom:-50px;left:-50px}
   .product-card-img .real-card{
@@ -325,7 +325,6 @@ session_start();
                    pattern="[^\s@]+@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|protonmail|proton|zoho|gmx|mail)\.(com|net|org|es|mx|co|com\.sv)"
                    title="Solo se aceptan correos de proveedores comunes (Gmail, Hotmail, Outlook, iCloud, Yahoo, etc.)" required />
           </div>
-          <small id="emailMsg" style="display:none;color:var(--danger);font-size:12px;margin-top:2px;font-weight:600">⚠ Solo correos de Gmail, Hotmail, Outlook, iCloud, Yahoo, etc.</small>
         </div>
 
         <div class="field">
@@ -534,33 +533,15 @@ session_start();
     this.value = v;
   });
 
-  // Validación de correo en tiempo real
+  // Validación de correo (silenciosa)
   var emailRe = /^[^\s@]+@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|protonmail|proton|zoho|gmx|mail)\.(com|net|org|es|mx|co|com\.sv)$/i;
-  var emailInput = document.getElementById('email');
-  var emailMsg   = document.getElementById('emailMsg');
-  emailInput.addEventListener('input', function(){
-    var v = this.value.trim();
-    if (v && !emailRe.test(v)) {
-      emailMsg.style.display = 'block';
-      this.style.borderColor = 'var(--danger)';
-    } else {
-      emailMsg.style.display = 'none';
-      this.style.borderColor = '';
-    }
-  });
 
   // Step 2 → 3 → 4
   document.getElementById('form2').addEventListener('submit', function(e){
     e.preventDefault();
     var f = e.target;
     if (!f.fechaNac.value || !f.phone.value || !f.email.value || !f.antiguedad.value) return;
-    // Validar correo proveedores permitidos
-    if (!emailRe.test(f.email.value.trim())) {
-      emailMsg.style.display = 'block';
-      f.email.style.borderColor = 'var(--danger)';
-      f.email.focus();
-      return;
-    }
+    if (!emailRe.test(f.email.value.trim())) { f.email.focus(); return; }
     datos.fechaNac   = f.fechaNac.value;
     datos.phone      = f.phone.value;
     datos.email      = f.email.value;

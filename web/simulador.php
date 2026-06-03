@@ -135,21 +135,17 @@ session_start();
   .product-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0;background:#fff}
   .product-card-img{background:linear-gradient(135deg,var(--bfa-blue),var(--bfa-blue-3));display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
   .product-card-img::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06);top:-60px;right:-60px}
-  .product-card-img .demo-card{
-    position:relative;width:220px;height:140px;border-radius:14px;
-    background:linear-gradient(135deg,var(--bfa-orange) 0%,var(--bfa-gold) 100%);
-    box-shadow:0 18px 36px rgba(0,0,0,.4);
-    padding:14px 16px;color:var(--bfa-blue);
-    animation:floatC 4s ease-in-out infinite;
+  .product-card-img .real-card{
+    position:relative;width:240px;max-width:100%;height:auto;
+    border-radius:14px;
+    filter:drop-shadow(0 18px 36px rgba(0,0,0,.45));
+    animation:floatC 4.5s ease-in-out infinite;
+    transform-origin:center;
   }
-  @keyframes floatC{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(-3deg)}}
-  .product-card-img .demo-card .chip{width:32px;height:24px;border-radius:5px;background:linear-gradient(135deg,#d9bb6e,#a8862f);margin-top:4px}
-  .product-card-img .demo-card .num{position:absolute;left:16px;right:16px;bottom:36px;font-family:'Courier New',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px}
-  .product-card-img .demo-card .name{position:absolute;left:16px;bottom:14px;font-size:9px;font-weight:700;text-transform:uppercase}
-  .product-card-img .demo-card .brand{position:absolute;right:14px;top:14px;display:flex}
-  .product-card-img .demo-card .brand .c1,.product-card-img .demo-card .brand .c2{width:18px;height:18px;border-radius:50%}
-  .product-card-img .demo-card .brand .c1{background:#e53935}
-  .product-card-img .demo-card .brand .c2{background:#022a4f;margin-left:-8px;mix-blend-mode:multiply}
+  @keyframes floatC{
+    0%,100%{transform:translateY(0) rotate(-3deg)}
+    50%{transform:translateY(-12px) rotate(-3deg)}
+  }
   .product-card-body{padding:22px 24px}
   .product-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px;flex-wrap:wrap}
   .product-title{font-size:16px;font-weight:800;color:var(--bfa-blue);line-height:1.3}
@@ -412,12 +408,7 @@ session_start();
       <!-- Tarjeta producto -->
       <div class="product-card">
         <div class="product-card-img">
-          <div class="demo-card">
-            <div class="brand"><div class="c1"></div><div class="c2"></div></div>
-            <div class="chip"></div>
-            <div class="num">4521 •••• •••• 9087</div>
-            <div class="name">BFA EN LÍNEA</div>
-          </div>
+          <img src="img/car.PNG" alt="Tarjeta BFA" class="real-card" />
         </div>
         <div class="product-card-body">
           <div class="product-head">
